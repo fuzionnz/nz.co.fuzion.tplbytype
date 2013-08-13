@@ -95,6 +95,11 @@ function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplN
   if(isset($form->_values['contribution_type_id'])) {
     $type = 'Type' . $form->_values['contribution_type_id'];
   }
+
+  if(isset($form->_values['campaign_id'])) {
+    $campaign = 'Campaign' . $form->_values['campaign_id'];
+  }
+
   if(empty($type)) {
     return;
   }
@@ -102,6 +107,12 @@ function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplN
   $template = CRM_Core_Smarty::singleton();
   if ($template->template_exists($possibleTpl)) {
     $tplName = $possibleTpl;
+    return $tplName;
   }
   return $tplName;
+  $possibleTpl = $formsToTouch[$formName]['path'] . $campaign . '/' . $formsToTouch[$formName]['file']. '.tpl';
+  if ($template->template_exists($possibleTpl)) {
+    $tplName = $possibleTpl;
+    return $tplName;
+  }
 }

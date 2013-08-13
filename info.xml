@@ -15,7 +15,7 @@
     <ver>4.2</ver>
     <ver>4.4</ver>
   </compatibility>
-  <comments>Will select the tpl for an event or contribution as CRM\Contribute\Form\Contribution\Type1\Main.tpl etc if the file exists</comments>
+  <comments>Will select the tpl for an event or contribution as CRM\Contribute\Form\Contribution\Type1\Main.tpl etc if the file exists or Campaign1 instead of type if applicable</comments>
   <civix>
     <namespace>CRM/Tplbytype</namespace>
   </civix>
