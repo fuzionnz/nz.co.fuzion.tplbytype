@@ -95,7 +95,9 @@ function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplN
   if(isset($form->_values['contribution_type_id'])) {
     $type = 'Type' . $form->_values['contribution_type_id'];
   }
-
+  if(empty($campaign)) {
+    return;
+  }
   if(isset($form->_values['campaign_id'])) {
     $campaign = 'Campaign' . $form->_values['campaign_id'];
   }
