@@ -95,14 +95,12 @@ function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplN
   if(isset($form->_values['contribution_type_id'])) {
     $type = 'Type' . $form->_values['contribution_type_id'];
   }
-  if(empty($campaign)) {
-    return;
-  }
+
   if(isset($form->_values['campaign_id'])) {
     $campaign = 'Campaign' . $form->_values['campaign_id'];
   }
 
-  if(empty($type)) {
+  if(empty($type) && empty($campaign)) {
     return;
   }
   $possibleTpl = $formsToTouch[$formName]['path'] . $type . '/' . $formsToTouch[$formName]['file']. '.tpl';
@@ -111,7 +109,12 @@ function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplN
     $tplName = $possibleTpl;
     return $tplName;
   }
-  return $tplName;
+  
+  if(empty($campaign)) {
+  	// return here to avoid it compiling a duff url
+  	return;
+  }
+
   $possibleTpl = $formsToTouch[$formName]['path'] . $campaign . '/' . $formsToTouch[$formName]['file']. '.tpl';
   if ($template->template_exists($possibleTpl)) {
     $tplName = $possibleTpl;
