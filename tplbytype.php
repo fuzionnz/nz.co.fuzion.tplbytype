@@ -74,10 +74,13 @@ function tplbytype_civicrm_managed(&$entities) {
  * (if one exists). It will look for
  * templates/CRM/Contribute/Form/Contribution/Type2/Main.php
  * where the form has a contribution or financial type of 2
+ *
  * @param string $formName name of the form
  * @param object $form (reference) form object
  * @param string $context page or form
  * @param string $tplName (reference) change this if required to the altered tpl file
+ *
+ * @return string
  */
 function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplName) {
   $formsToTouch = array(
@@ -109,15 +112,20 @@ function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplN
     $tplName = $possibleTpl;
     return $tplName;
   }
-  
+
   if(empty($campaign)) {
-  	// return here to avoid it compiling a duff url
-  	return;
+    // return here to avoid it compiling a duff url
+    return;
   }
 
-  $possibleTpl = $formsToTouch[$formName]['path'] . $campaign . '/' . $formsToTouch[$formName]['file']. '.tpl';
-  if ($template->template_exists($possibleTpl)) {
-    $tplName = $possibleTpl;
-    return $tplName;
+  $possibleTemplates = array(
+    $formsToTouch[$formName]['path'] . $campaign . '/' . $formsToTouch[$formName]['file']. '.tpl',
+    $formsToTouch[$formName]['path'] . 'AnyCampaign/' . $formsToTouch[$formName]['file']. '.tpl',
+  );
+  foreach ($possibleTemplates as $possibleTpl) {
+    if ($template->template_exists($possibleTpl)) {
+      $tplName = $possibleTpl;
+      return $tplName;
+    }
   }
 }
