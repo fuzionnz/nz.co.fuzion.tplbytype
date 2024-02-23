@@ -14,15 +14,18 @@
     <author>Eileen McNaughton</author>
     <email>eileen@fuzion.co.nz</email>
   </maintainer>
-  <releaseDate>2013-08-11</releaseDate>
-  <version>1.1</version>
+  <releaseDate>2024-02-24</releaseDate>
+  <version>1.1.1</version>
   <develStage>stable</develStage>
   <compatibility>
-    <ver>4.2</ver>
-    <ver>4.4</ver>
+    <ver>5.26</ver>
   </compatibility>
   <comments>Will select the tpl for an event or contribution as CRM\Contribute\Form\Contribution\Type1\Main.tpl etc if the file exists or Campaign1 instead of type if applicable</comments>
   <civix>
     <namespace>CRM/Tplbytype</namespace>
+    <format>23.02.1</format>
   </civix>
+  <classloader>
+    <psr4 prefix="Civi\" path="Civi"/>
+  </classloader>
 </extension>
