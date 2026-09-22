@@ -37,11 +37,11 @@ function tplbytype_civicrm_enable() {
  * @return string
  */
 function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplName) {
-  $formsToTouch = array(
-    'CRM_Contribute_Form_Contribution_Main' => array('path' => 'CRM/Contribute/Form/Contribution/', 'file' => 'Main'),
-    'CRM_Contribute_Form_Contribution_Confirm' => array('path' => 'CRM/Contribute/Form/Contribution', 'file' => 'Confirm'),
-    'CRM_Contribute_Form_Contribution_ThankYou' => array('path' => 'CRM/Contribute/Form/Contribution', 'file' => 'ThankYou'),
-  );
+  $formsToTouch = [
+    'CRM_Contribute_Form_Contribution_Main' => ['path' => 'CRM/Contribute/Form/Contribution/', 'file' => 'Main'],
+    'CRM_Contribute_Form_Contribution_Confirm' => ['path' => 'CRM/Contribute/Form/Contribution', 'file' => 'Confirm'],
+    'CRM_Contribute_Form_Contribution_ThankYou' => ['path' => 'CRM/Contribute/Form/Contribution', 'file' => 'ThankYou'],
+  ];
 
   if(!array_key_exists($formName, $formsToTouch)) {
     return;
@@ -72,10 +72,10 @@ function tplbytype_civicrm_alterTemplateFile($formName, &$form, $context, &$tplN
     return;
   }
 
-  $possibleTemplates = array(
+  $possibleTemplates = [
     $formsToTouch[$formName]['path'] . $campaign . '/' . $formsToTouch[$formName]['file']. '.tpl',
     $formsToTouch[$formName]['path'] . 'AnyCampaign/' . $formsToTouch[$formName]['file']. '.tpl',
-  );
+  ];
   foreach ($possibleTemplates as $possibleTpl) {
     if ($template->template_exists($possibleTpl)) {
       $tplName = $possibleTpl;
